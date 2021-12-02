@@ -1,0 +1,43 @@
+# Virtual environments
+.venv
+venv
+
+# Cache files
+__pycache__/
+.cache/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+
+# Editors
+.idea
+.vscode
+
+# Translations
+*.mo
+
+# Sphinx docs
+docs/_build/
+
+# Coverage
+htmlcov/
+
+# Sqlite databases
+*.sqlite3
+*.sqlite3-journal
+*.db
+
+# .env files
+.env
+.env.development
+.env.production
+
+# Media folders
+media/
+!media/default/
+
+# Staticfiles
+staticfiles
+
+# Todos
+*.todo

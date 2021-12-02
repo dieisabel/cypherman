@@ -1,0 +1,8 @@
+# Enabling EOL normalization for all files
+* text=auto
+
+# Windows files (need CRLF)
+*.bat eol=crlf
+
+# Unix files (need LF)
+*.sh eol=lf
