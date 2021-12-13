@@ -1,0 +1,36 @@
+name: test
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.5
+      - name: Install poetry
+        run: pip install 'poetry==1.1.11'
+        shell: bash
+      - name: Install dependencies
+        run: poetry install --dev
+        shell: bash
+
+  test:
+
+    runs-on: ubuntu-20.04
+    needs:
+      - build
+
+    steps:
+      - name: Test application using script for testing
+        run: ./scripts/test.sh
+        shell: bash
