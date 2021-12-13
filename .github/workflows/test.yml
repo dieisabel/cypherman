@@ -3,34 +3,47 @@ name: test
 on:
   push:
     branches:
+      - master
       - develop
 
 jobs:
-  build:
+  test:
+    name: Test application
 
     runs-on: ubuntu-20.04
 
     steps:
+
+      # Build application
       - name: Clone repository
         uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.9.5
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+        shell: bash
       - name: Install poetry
-        run: pip install 'poetry==1.1.11'
+        run: pip install --user 'poetry==1.1.11'
         shell: bash
+      - name: Load cached dependencies
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: poetry install --dev
+        if: steps.cached-poetry-dependencies.outputs.cache-hint != 'true'
+        run: poetry install
         shell: bash
+        env:
+          POETRY_VIRTUALENVS_CREATE: true
+          POETRY_VIRTUALENVS_IN_PROJECT: true
 
-  test:
-
-    runs-on: ubuntu-20.04
-    needs:
-      - build
-
-    steps:
-      - name: Test application using script for testing
-        run: ./scripts/test.sh
+      # Test application
+      - name: Run tests using script
+        run: |
+          chmod +x ./scripts/test.sh
+          ./scripts/test.sh
         shell: bash
