@@ -1,19 +1,21 @@
 name: test
 
 on:
+  # TODO: Do we need to run workflow on merged PR commits?
   push:
+    branches:
+      - master
+      - develop
+  pull_request:
     branches:
       - master
       - develop
 
 jobs:
-  test:
-    name: Test application
-
+  build_test:
+    name: Build & test
     runs-on: ubuntu-20.04
-
     steps:
-
       # Build application
       - name: Clone repository
         uses: actions/checkout@v2
@@ -37,8 +39,12 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hint != 'true'
         run: poetry install
         shell: bash
+        # Poetry gets settings from config file or environment variables
         env:
+          # Poetry will create virtual environment
           POETRY_VIRTUALENVS_CREATE: true
+          # Poetry will create or use virtual environment that is located in
+          # project directory
           POETRY_VIRTUALENVS_IN_PROJECT: true
 
       # Test application
