@@ -5,7 +5,10 @@ from dataclasses import dataclass
 
 @dataclass
 class HashesDTO:
-    algorithm: str
-    bits: int
-    checksum: str
-    is_secure: bool
+
+    @dataclass
+    class Response:
+        algorithm: str
+        bits: int
+        checksum: str
+        is_secure: bool
