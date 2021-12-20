@@ -10,7 +10,7 @@ from services.hashing.factories import (
     IHashingAlgorithmFactory,
 )
 from entities.hashing_algorithms import IHashingAlgorithm
-from schemas import HashesDTO
+from dtos import HashesDTO
 
 
 class HashingService(IHashingService):
@@ -30,7 +30,7 @@ class HashingService(IHashingService):
     def get_available_algorithms(self) -> List[str]:
         return self._factory.get_available_algorithms()
 
-    # TODO: Maybe we should create separate class that will create dtos?
+    # TODO: Maybe we should create separate class that will create dtosdtos?
     def _generate_dto(self, algorithm: IHashingAlgorithm, checksum: str) -> HashesDTO:
         return HashesDTO(
             algorithm=algorithm.name,

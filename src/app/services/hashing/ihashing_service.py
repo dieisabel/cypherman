@@ -3,7 +3,7 @@ __all__ = ['IHashingService']
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
-from schemas import HashesDTO
+from dtos import HashesDTO
 
 
 class IHashingService(ABC):

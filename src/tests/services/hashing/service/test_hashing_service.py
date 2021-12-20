@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from services.hashing import IHashingService
-from schemas import HashesDTO
+from dtos import HashesDTO
 
 
 class TestHashingService:
