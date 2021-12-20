@@ -10,6 +10,10 @@ on:
     branches:
       - master
       - develop
+    types:
+      - opened
+      - reopened
+      - ready_for_review
 
 jobs:
   build_test:
