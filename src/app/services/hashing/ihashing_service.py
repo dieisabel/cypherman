@@ -8,9 +8,8 @@ from dtos import HashesDTO
 
 class IHashingService(ABC):
 
-    # TODO: Maybe we should use HashesRequest or some sort of DTO as argument
     @abstractmethod
-    def hash_user_data(self, data: str, algorithm_name: str) -> Optional[HashesDTO]:
+    def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
         raise NotImplementedError
 
     def get_available_algorithms(self) -> List[str]:

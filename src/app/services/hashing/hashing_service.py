@@ -16,23 +16,22 @@ from dtos import HashesDTO
 class HashingService(IHashingService):
     _factory: IHashingAlgorithmFactory
 
-    def __init__(
-        self, factory: IHashingAlgorithmFactory = Depends(HashingAlgorithmFactory)
-    ) -> None:
+    def __init__(self, factory: IHashingAlgorithmFactory = Depends(HashingAlgorithmFactory)) -> None:
         self._factory = factory
 
-    def hash_user_data(self, data: str, algorithm_name: str) -> Optional[HashesDTO]:
-        algorithm: Optional[IHashingAlgorithm] = self._factory.create_algorithm(algorithm_name)
+    def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
+        algorithm: Optional[IHashingAlgorithm] = self._factory.create_algorithm(request.algorithm)
         if not algorithm:
             return None
-        return self._generate_dto(algorithm, algorithm.hash(data))
+        return self._generate_response(algorithm, algorithm.hash(request.data))
 
     def get_available_algorithms(self) -> List[str]:
         return self._factory.get_available_algorithms()
 
-    # TODO: Maybe we should create separate class that will create dtosdtos?
-    def _generate_dto(self, algorithm: IHashingAlgorithm, checksum: str) -> HashesDTO:
-        return HashesDTO(
+    # TODO: Maybe we should create separate class that will create response?
+    @staticmethod
+    def _generate_response(algorithm: IHashingAlgorithm, checksum: str) -> HashesDTO.Response:
+        return HashesDTO.Response(
             algorithm=algorithm.name,
             bits=algorithm.bits,
             checksum=checksum,

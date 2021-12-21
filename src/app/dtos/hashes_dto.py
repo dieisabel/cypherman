@@ -7,6 +7,13 @@ from dataclasses import dataclass
 class HashesDTO:
 
     @dataclass
+    class Request:
+        data: str
+
+        def set_algorithm(self, algorithm: str):
+            self.algorithm = algorithm
+
+    @dataclass
     class Response:
         algorithm: str
         bits: int
