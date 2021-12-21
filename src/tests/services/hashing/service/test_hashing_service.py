@@ -1,13 +1,15 @@
 from typing import Optional, List
 
 from services.hashing import IHashingService
-from schemas import HashesDTO
+from dtos import HashesDTO
 
 
 class TestHashingService:
     def test_hash_user_data_with_md5(self, service: IHashingService) -> None:
         # Arrange
-        expected: HashesDTO = HashesDTO(
+        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
+        request.set_algorithm('md5')
+        expected: HashesDTO.Response = HashesDTO.Response(
             algorithm='md5',
             bits=128,
             checksum='MD5 Hash',
@@ -15,14 +17,16 @@ class TestHashingService:
         )
 
         # Act
-        actual: Optional[HashesDTO] = service.hash_user_data('Hello, World!', 'md5')
+        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
 
         # Assert
         assert actual == expected
 
     def test_hash_user_data_with_sha1(self, service: IHashingService) -> None:
         # Arrange
-        expected: HashesDTO = HashesDTO(
+        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
+        request.set_algorithm('sha1')
+        expected: HashesDTO.Response = HashesDTO.Response(
             algorithm='sha1',
             bits=160,
             checksum='SHA1 Hash',
@@ -30,14 +34,16 @@ class TestHashingService:
         )
 
         # Act
-        actual: Optional[HashesDTO] = service.hash_user_data('Hello, World!', 'sha1')
+        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
 
         # Assert
         assert actual == expected
 
     def test_hash_user_data_with_non_supported_algorithm(self, service: IHashingService) -> None:
         # Arrange + Act
-        actual: Optional[HashesDTO] = service.hash_user_data('Hello, World!', 'sha256')
+        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
+        request.set_algorithm('sha256')
+        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
 
         # Assert
         assert actual is None
