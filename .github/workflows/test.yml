@@ -33,7 +33,7 @@ jobs:
       - name: Install poetry
         run: pip install --user 'poetry==1.1.11'
         shell: bash
-      - name: Load cached dependencies
+      - name: Cache virtual environment
         id: cached-poetry-dependencies
         uses: actions/cache@v2
         with:
