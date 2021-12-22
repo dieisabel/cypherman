@@ -11,5 +11,11 @@ class MD5HashingAlgorithm(IHashingAlgorithm):
     is_secure: bool = False
 
     def hash(self, data: str) -> str:
+        """Hash data with MD5 hashing algorithm
+
+        :param data: Data to hash
+        :return: Checksum
+        """
+
         encoded_data: bytes = data.encode('utf-8')
         return hashlib.md5(encoded_data).hexdigest()

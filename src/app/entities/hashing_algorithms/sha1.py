@@ -11,5 +11,11 @@ class SHA1HashingAlgorithm(IHashingAlgorithm):
     is_secure: bool = False
 
     def hash(self, data: str) -> str:
+        """Hash data with SHA1 hashing algorithm
+
+        :param data: Data to hash
+        :return: Checksum
+        """
+
         encoded_data: bytes = data.encode('utf-8')
         return hashlib.sha1(encoded_data).hexdigest()
