@@ -18,6 +18,7 @@ class IHashingService(ABC):
 
         raise NotImplementedError
 
+    @abstractmethod
     def get_available_algorithms(self) -> List[str]:
         """Get available hashing algorithms
 
