@@ -17,15 +17,31 @@ class HashingService(IHashingService):
     _factory: IHashingAlgorithmFactory
 
     def __init__(self, factory: IHashingAlgorithmFactory = Depends(HashingAlgorithmFactory)) -> None:
+        """HashingService constructor
+
+        :param factory: Hashing algorithm factory, which is used to work with hashing algorithms
+        """
+
         self._factory = factory
 
     def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
+        """Hash user data
+
+        :param request: A request object that contains data and algorithm to use
+        :return: HashesDTO with all needed data: algorithm, bits, checksum and is_secure flag
+        """
+
         algorithm: Optional[IHashingAlgorithm] = self._factory.create_algorithm(request.algorithm)
         if not algorithm:
             return None
         return self._generate_response(algorithm, algorithm.hash(request.data))
 
     def get_available_algorithms(self) -> List[str]:
+        """Get available hashing algorithms
+
+        :return: A list which contains supported hashing algorithms
+        """
+
         return self._factory.get_available_algorithms()
 
     # TODO: Maybe we should create separate class that will create response?
