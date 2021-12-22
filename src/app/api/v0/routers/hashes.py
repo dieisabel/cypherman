@@ -18,6 +18,7 @@ router = APIRouter(
 async def get_available_hashing_algorithms(
     service: IHashingService = Depends(HashingService)
 ) -> List[str]:
+    """Display a list that contains supported hashing algorithms"""
     return service.get_available_algorithms()
 
 
@@ -27,6 +28,13 @@ async def hash_user_data(
     algorithm: str,
     service: IHashingService = Depends(HashingService)
 ) -> HashesDTO.Response:
+    """
+    Hash user data
+
+    - **algorithm** - Hashing algorithm to use
+    - **data** - User data
+    """
+
     request.set_algorithm(algorithm)
     result: Optional[HashesDTO.Response] = service.hash_user_data(request)
     if not result:
