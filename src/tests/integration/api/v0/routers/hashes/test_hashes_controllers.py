@@ -16,7 +16,7 @@ class TestHashesControllers:
         body: Dict[str, Any] = {'data': 'Hello, World!'}
 
         # Act
-        response: Response = client.post('/hashes/md5/hash', json=body)
+        response: Response = client.post('/api/v0/hashes/md5/hash', json=body)
 
         # Assert
         assert response.status_code == 200
@@ -33,7 +33,7 @@ class TestHashesControllers:
         body: Dict[str, Any] = {'data': 'Hello, World!'}
 
         # Act
-        response: Response = client.post('/hashes/sha1/hash', json=body)
+        response: Response = client.post('/api/v0/hashes/sha1/hash', json=body)
 
         # Assert
         assert response.status_code == 200
@@ -45,7 +45,7 @@ class TestHashesControllers:
         body: Dict[str, Any] = {'data': 'Hello, World!'}
 
         # Act
-        response = client.post('/hashes/sha256/hash', json=body)
+        response = client.post('/api/v0/hashes/sha256/hash', json=body)
 
         # Assert
         assert response.status_code == 404
@@ -56,7 +56,7 @@ class TestHashesControllers:
         expected: List[str] = ['md5']
 
         # Act
-        response: Response = client.get('/hashes')
+        response: Response = client.get('/api/v0/hashes')
 
         # Assert
         assert response.status_code == 200
