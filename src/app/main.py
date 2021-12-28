@@ -2,7 +2,7 @@ __all__ = ['application']
 
 from fastapi import FastAPI
 
-from api.v0.routers import hashes
+from api import router
 from config import get_settings
 
 settings = get_settings()
@@ -13,4 +13,4 @@ application = FastAPI(
     version=settings.VERSION,
 )
 
-application.include_router(hashes.router)
+application.include_router(router)
