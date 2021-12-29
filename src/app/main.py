@@ -3,9 +3,9 @@ __all__ = ['application']
 from fastapi import FastAPI
 
 from api import router
-from config import get_settings
+from config import get_config
 
-settings = get_settings()
+settings = get_config()
 
 application = FastAPI(
     title=settings.APPLICATION_NAME,
