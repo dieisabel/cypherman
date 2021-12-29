@@ -3,4 +3,5 @@ __all__ = [
     'get_settings',
 ]
 
-from config.settings import Settings, get_settings
+from config.settings import Settings
+from config.dependencies import get_settings

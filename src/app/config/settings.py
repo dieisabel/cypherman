@@ -1,9 +1,4 @@
-__all__ = [
-    'Settings',
-    'get_settings',
-]
-
-from functools import lru_cache
+__all__ = ['Settings']
 
 from pydantic import BaseSettings
 
@@ -19,8 +14,3 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = '.env'
-
-
-@lru_cache()
-def get_settings() -> Settings:
-    return Settings()
