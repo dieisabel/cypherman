@@ -7,6 +7,7 @@ import os
 from config.base import Config
 from config.development import DevelopmentConfig
 from config.testing import TestingConfig
+from config.production import ProductionConfig
 from config.exceptions import ImproperlyConfigured
 
 
@@ -19,6 +20,7 @@ def get_config() -> Config:
     config_registry: Dict[str, Type[Config]] = {
         'development': DevelopmentConfig,
         'testing': TestingConfig,
+        'production': ProductionConfig,
     }
     config_class: Optional[Type[Config]] = config_registry.get(config_environ.lower())
     if not config_class:
