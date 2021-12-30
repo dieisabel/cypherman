@@ -1,6 +1,6 @@
 __all__ = ['ConfigMock']
 
-from config.base import Config
+from core.config import Config
 
 
 class ConfigMock(Config):
