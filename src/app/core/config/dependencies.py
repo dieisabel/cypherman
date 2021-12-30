@@ -4,11 +4,11 @@ from typing import Dict, Type, Optional
 from functools import lru_cache
 import os
 
-from config.base import Config
-from config.development import DevelopmentConfig
-from config.testing import TestingConfig
-from config.production import ProductionConfig
-from config.exceptions import ImproperlyConfigured
+from core.config.base import Config
+from core.config.development import DevelopmentConfig
+from core.config.testing import TestingConfig
+from core.config.production import ProductionConfig
+from core.exceptions import ImproperlyConfigured
 
 
 @lru_cache

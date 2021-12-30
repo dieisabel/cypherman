@@ -1,6 +1,6 @@
 __all__ = ['ProductionConfig']
 
-from config.base import BaseConfig
+from core.config.base import BaseConfig
 
 
 class ProductionConfig(BaseConfig):

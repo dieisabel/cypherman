@@ -3,7 +3,7 @@ __all__ = ['application']
 from fastapi import FastAPI
 
 from api import router
-from config import get_config
+from core.config import get_config
 
 settings = get_config()
 

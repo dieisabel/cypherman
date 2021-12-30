@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.engine.mock import MockConnection
 from sqlalchemy.orm import sessionmaker, Session
 
-from config import get_config, Config
+from core.config import get_config, Config
 
 
 def DatabaseSession() -> Session:
