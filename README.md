@@ -10,7 +10,9 @@
    4. [Deploying](#deploying)
    5. [Production local testing](#production-local-testing)
 3. [Development](#development)
-   1. [Code style](#code-style)
+   1. [.env.development](#.env.development)
+   2. [Dependencies](#dependencies)
+   3. [Code style](#code-style)
 4. [Application architecture](#application-architecture)
    1. [Configuration](#configuration)
 5. [Testing](#testing)
@@ -101,6 +103,22 @@ Clone a project using `git clone https://github.com/dieisabel/cypherman`.
 Use poetry to create a virtual environment and install there development dependencies with `poetry install --dev`.
 
 To run development server go to app folder using `cd /src/app/` and run `poetry run uvicorn main:application --reload`.
+
+#### .env.development
+
+In a project we use `.env.development` file to provide sensitive information, like database URL, keys, etc in
+development environment. To create your own `.env.development` file use `.env.development.example`, which contains
+settings that you need to provide, and it's default values.
+
+#### Dependencies
+
+In a project we use Dependency Injection, which is
+[provided by FastAPI framework](https://fastapi.tiangolo.com/tutorial/dependencies/). Here a list of common dependencies
+that you can use in code:
+- `get_config` returns a `Config` object, which is current application configuration.
+- `DatabaseSession` returns a SQLAlchemy `Session` object, which allows you to work with database.
+- `AlchemyMetadata` return a SQLAlchemy `MetaData` object, which allows you to map models with entities. For more
+  information see [Imperative (a.k.a. Classical) Mappings](https://docs.sqlalchemy.org/en/14/orm/mapping_styles.html#orm-imperative-mapping).
 
 #### Code style
 
