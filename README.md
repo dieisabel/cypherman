@@ -10,9 +10,12 @@
    4. [Deploying](#deploying)
    5. [Production local testing](#production-local-testing)
 3. [Development](#development)
-4. [Testing](#testing)
-5. [Documentation](#documentation)
-6. [License](#license)
+   1. [Code style](#code-style)
+4. [Application architecture](#application-architecture)
+   1. [Configuration](#configuration)
+5. [Testing](#testing)
+6. [Documentation](#documentation)
+7. [License](#license)
 
 ### Description
 
@@ -105,6 +108,21 @@ Project contains [editorconfig file](https://editorconfig.org/), so make sure yo
 - Line length is 120
 - CamelCase for classes
 - snake_case for functions and methods
+
+### Application architecture
+
+#### Configuration
+
+Modules that are related to a configuration located in `config/` package.
+
+Application have 3 main configurations:
+- Development
+- Production
+- Testing
+
+To set a particular configuration use `FASTAPI_CONFIGURATION` environment variable. Also make sure a configuration
+registry (a map for configurations and it's classes, see `config/dependencies.py:_get_config_registry`) contains
+your configuration.
 
 ### Testing
 
