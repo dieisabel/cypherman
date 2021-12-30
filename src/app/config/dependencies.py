@@ -12,7 +12,14 @@ from config.exceptions import ImproperlyConfigured
 
 
 @lru_cache
-def get_config():
+def get_config() -> Config:
+    """Get current application configuration
+
+    To get a configuration function looks at the FASTAPI_CONFIGURATION environ and configuration registry.
+
+    :raises ImproperlyConfigured: FASTAPI_CONFIGURATION environ is not set or configuration is not in registry.
+    :return: Current application configuration
+    """
     return _get_config(_get_config_registry())
 
 
