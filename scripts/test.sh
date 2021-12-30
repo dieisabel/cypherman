@@ -3,6 +3,8 @@
 SRC_DIR="$(pwd)/src"
 APP_DIR="$SRC_DIR/app"
 
+export FASTAPI_CONFIGURATION="TESTING"
+
 # Check if PYTHONPATH is not set or not contain path to src directory
 # Src directory can be used to import object for tests, like:
 # >>> from tests.something.mock import SomeObjectMock

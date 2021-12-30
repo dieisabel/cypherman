@@ -1,6 +1,7 @@
 __all__ = [
-    'Settings',
-    'get_settings',
+    'Config',
+    'get_config',
 ]
 
-from config.settings import Settings, get_settings
+from config.base import Config
+from config.dependencies import get_config
