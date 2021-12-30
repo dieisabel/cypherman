@@ -57,3 +57,6 @@ jobs:
           chmod +x ./scripts/test.sh
           ./scripts/test.sh
         shell: bash
+        env:
+          # Select configuration for testing. For more information see Application Architecture/Configuration in docs
+          FASTAPI_CONFIGURATION: 'testing'
