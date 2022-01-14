@@ -3,4 +3,5 @@ __all__ = [
     'AlchemyMetadata',
 ]
 
-from db.database import DatabaseSession, AlchemyMetadata
+from db.dependencies import DatabaseSession
+from db.dependencies import AlchemyMetadata
