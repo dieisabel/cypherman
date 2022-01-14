@@ -30,4 +30,4 @@ ENGINE: MockConnection = create_engine(
     echo=CONFIG.SQLALCHEMY_ECHO,           # type: ignore
 )
 SESSION_MAKER: sessionmaker = sessionmaker(bind=ENGINE)
-METADATA: MetaData = MetaData()
+METADATA: MetaData = MetaData(bind=ENGINE)
