@@ -8,8 +8,8 @@ __all__ = [
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
 
-from db.constants import SESSION_MAKER
-from db.constants import METADATA
+from core.db.constants import SESSION_MAKER
+from core.db.constants import METADATA
 
 
 def DatabaseSession() -> Session:
