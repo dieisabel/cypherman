@@ -4,4 +4,5 @@ from core.config.base import BaseConfig
 
 
 class TestingConfig(BaseConfig):
-    pass
+    SQLALCHEMY_DATABASE_URL: str = 'sqlite:///:memory:'
+    SQLALCHEMY_ECHO: bool = False
