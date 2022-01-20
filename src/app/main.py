@@ -4,11 +4,11 @@ from fastapi import FastAPI
 
 from api import router
 from core.config import get_config
-from core.db import start_mappers
+from core.db.initialize import initialize_database
 
 settings = get_config()
 
-start_mappers()
+initialize_database()
 
 application = FastAPI(
     title=settings.APPLICATION_NAME,
