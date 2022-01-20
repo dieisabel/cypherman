@@ -29,5 +29,5 @@ ENGINE: MockConnection = create_engine(
     url=CONFIG.SQLALCHEMY_DATABASE_URL,    # type: ignore
     echo=CONFIG.SQLALCHEMY_ECHO,           # type: ignore
 )
-SESSION_MAKER: sessionmaker = sessionmaker(bind=ENGINE)
-METADATA: MetaData = MetaData()
+SESSION_MAKER: sessionmaker = sessionmaker(bind=ENGINE, autocommit=False)
+METADATA: MetaData = MetaData(bind=ENGINE)
