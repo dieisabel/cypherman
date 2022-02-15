@@ -13,7 +13,7 @@ class User:
     :param email: Email
     """
 
-    def __init__(self, user_id: int, username: str, email: Optional[str]) -> None:
+    def __init__(self, user_id: int, username: str, email: Optional[str] = None) -> None:
         self.user_id = user_id
         self.username = username
         self.email = email
