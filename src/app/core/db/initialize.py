@@ -9,10 +9,12 @@ from core.db.dependencies import AlchemyMetadata
 def initialize_database() -> None:
     """Initialize database
 
-    Creates all tables and maps entities to its appropriate tables. Intended to use only once at application creating,
-    overwise there will be an error, which indicates that entities already have defined mappers.
+    Creates all tables and maps entities to its appropriate tables.
 
-    :return: None
+    Warning:
+        Intended to use only once at application creating, overwise there will be an error, which indicates that
+        entities already have defined mappers.S
     """
+
     AlchemyMetadata().create_all()
     start_mappers()

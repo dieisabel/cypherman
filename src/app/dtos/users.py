@@ -1,4 +1,4 @@
-"""Module for users data transfer object and its mappers"""
+"""Module for users data transfer objects and its mappers"""
 
 __all__ = [
     'UsersRequest',

@@ -1,5 +1,9 @@
-__all__ = ['ImproperlyConfigured']
+"""Module for application exceptions"""
+
+__all__ = [
+    'ImproperlyConfigured'
+]
 
 
 class ImproperlyConfigured(Exception):
-    pass
+    """Indicates that there are something wrong with application configuration"""

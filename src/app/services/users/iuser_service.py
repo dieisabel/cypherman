@@ -62,9 +62,6 @@ class IUserService(ABC):
         Args:
             user_id: User identifier
 
-        Returns:
-            None
-
         Raises:
             UserNotFoundException: If user with specified identifier is not found
         """

@@ -1,8 +1,12 @@
+"""Module for configuration dependencies, which can be used in client code"""
+
 __all__ = ['get_config']
 
-from typing import Dict, Type, Optional
-from functools import lru_cache
 import os
+from typing import Dict
+from typing import Type
+from typing import Optional
+from functools import lru_cache
 
 from core.config.base import Config
 from core.config.development import DevelopmentConfig
@@ -15,16 +19,20 @@ from core.exceptions import ImproperlyConfigured
 def get_config() -> Config:
     """Get current application configuration
 
-    To get a configuration function looks at the FASTAPI_CONFIGURATION environ and configuration registry.
+    Looks at FASTAPI_CONFIGURATION environment variable to determine what configuration to use.
 
-    :raises ImproperlyConfigured: FASTAPI_CONFIGURATION environ is not set or configuration is not in registry.
-    :return: Current application configuration
+    Returns:
+        Current application configuration
+
+    Raises:
+        ImproperlyConfigured: FASTAPI_CONFIGURATION environ is not set or configuration is not in registry.
     """
+
     return _get_config(_get_config_registry())
 
 
 def _get_config(registry: Dict[str, Type[Config]]) -> Config:
-    config_environ: str = os.environ.get('FASTAPI_CONFIGURATION', None)
+    config_environ: Optional[str] = os.environ.get('FASTAPI_CONFIGURATION', None)
     if not config_environ:
         raise ImproperlyConfigured('Application configuration is not set. Set FASTAPI_CONFIGURATION environ.')
 

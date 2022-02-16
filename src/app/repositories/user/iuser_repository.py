@@ -1,4 +1,4 @@
-"""Module for User Repository interface"""
+"""Module for user repository interface"""
 
 __all__ = ['IUserRepository']
 
@@ -11,39 +11,47 @@ from entities.users import User
 
 
 class IUserRepository(ABC):
-    """User Repository Interface"""
+    """User repository interface"""
 
     @abstractmethod
     def find_user_by_id(self, identifier: int) -> Optional[User]:
         """Find user by its identifier
 
-        :param identifier: Identifier
-        :return: User entity if User with this identifier exists in database
+        Args:
+            identifier: User identifier
+
+        Returns:
+            User entity if User with identifier exists, otherwise None
         """
+
         raise NotImplementedError
 
     @abstractmethod
     def find_all_users(self) -> List[User]:
         """Find all users
 
-        :return: A list with users, may be empty if there are no users in database
+        Returns:
+            A list with users, may be empty if there are no users
         """
+
         raise NotImplementedError
 
     @abstractmethod
     def add_user(self, entity: User) -> None:
         """Add user object to a database table
 
-        :param entity: User entity
-        :return: Created User object
+        Args:
+            entity: User entity
         """
+
         raise NotImplementedError
 
     @abstractmethod
     def remove_user(self, entity: User) -> None:
         """Remove specified user from database table
 
-        :param entity: User to delete
-        :return: None
+        Args:
+            entity: User that you want to remove
         """
+
         raise NotImplementedError

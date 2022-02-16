@@ -1,4 +1,4 @@
-"""Module for User Repository"""
+"""Module for user repository implementation"""
 
 __all__ = ['UserRepository']
 
@@ -12,9 +12,10 @@ from entities.users import User
 
 
 class UserRepository(IUserRepository):
-    """User repository
+    """User repository implementation
 
-    :param session: Session object to work with database
+    Args:
+        session: Session object to work with database
     """
 
     def __init__(self, session: Session) -> None:
@@ -23,30 +24,38 @@ class UserRepository(IUserRepository):
     def find_user_by_id(self, identifier: int) -> Optional[User]:
         """Find user by its identifier
 
-        :param identifier: Identifier
-        :return: User entity if User with this identifier exists in database
+        Args:
+            identifier: User identifier
+
+        Returns:
+            User entity if User with identifier exists, otherwise None
         """
+
         return self._session.query(User).get(identifier)
 
     def find_all_users(self) -> List[User]:
         """Find all users
 
-        :return: A list with users, may be empty if there are no users in database
+        Returns:
+            A list with users, may be empty if there are no users
         """
+
         return self._session.query(User).all()
 
     def add_user(self, entity: User) -> None:
         """Add user object to a database table
 
-        :param entity: User entity
-        :return: Created User object
+        Args:
+            entity: User entity
         """
+
         self._session.add(entity)
 
     def remove_user(self, entity: User) -> None:
         """Remove specified user from database table
 
-        :param entity: User to delete
-        :return: None
+        Args:
+            entity: User that you want to remove
         """
+
         self._session.delete(entity)

@@ -1,3 +1,5 @@
+"""Module for hashes data transfer objects"""
+
 __all__ = ['HashesDTO']
 
 from dataclasses import dataclass

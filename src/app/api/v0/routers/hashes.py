@@ -1,12 +1,21 @@
+"""Module for routes for hashing user data
+
+Note:
+    FastAPI can extract documentation from routes in Markdown and display it,
+    so routes docstrings differs from other docstrings
+"""
+
 __all__ = ['router']
 
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
 
-from services.hashing import IHashingService, HashingService
+from services.hashing import IHashingService
+from services.hashing import HashingService
 from dtos import HashesDTO
 
 router = APIRouter(
