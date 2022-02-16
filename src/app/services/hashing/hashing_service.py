@@ -1,34 +1,37 @@
+"""Module for hashing service implementation"""
+
 __all__ = ['HashingService']
 
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 from fastapi import Depends
 
 from services.hashing import IHashingService
-from services.hashing.factories import (
-    HashingAlgorithmFactory,
-    IHashingAlgorithmFactory,
-)
+from services.hashing.factories import HashingAlgorithmFactory
+from services.hashing.factories import IHashingAlgorithmFactory
 from entities.hashing_algorithms import IHashingAlgorithm
 from dtos import HashesDTO
 
 
 class HashingService(IHashingService):
-    _factory: IHashingAlgorithmFactory
+    """Hashing service implementation
+
+    Args:
+        factory: Factory for creating hashing algorithms
+    """
 
     def __init__(self, factory: IHashingAlgorithmFactory = Depends(HashingAlgorithmFactory)) -> None:
-        """HashingService constructor
-
-        :param factory: Hashing algorithm factory, which is used to work with hashing algorithms
-        """
-
         self._factory = factory
 
     def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
         """Hash user data
 
-        :param request: A request object that contains data and algorithm to use
-        :return: HashesDTO with all needed data: algorithm, bits, checksum and is_secure flag
+        Args:
+            request: HashesRequest object with data
+
+        Returns:
+            HashesResponse with all needed data
         """
 
         algorithm: Optional[IHashingAlgorithm] = self._factory.create_algorithm(request.algorithm)
@@ -39,12 +42,12 @@ class HashingService(IHashingService):
     def get_available_algorithms(self) -> List[str]:
         """Get available hashing algorithms
 
-        :return: A list which contains supported hashing algorithms
+        Returns:
+            A list with supported hashing algorihtms
         """
 
         return self._factory.get_available_algorithms()
 
-    # TODO: Maybe we should create separate class that will create response?
     @staticmethod
     def _generate_response(algorithm: IHashingAlgorithm, checksum: str) -> HashesDTO.Response:
         return HashesDTO.Response(

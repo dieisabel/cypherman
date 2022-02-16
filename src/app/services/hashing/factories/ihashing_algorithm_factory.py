@@ -1,20 +1,27 @@
+"""Module for hashing algorithm factory interface"""
+
 __all__ = ['IHashingAlgorithmFactory']
 
-from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Type
+from abc import ABC
+from abc import abstractmethod
+from typing import Optional
+from typing import List
 
 from entities.hashing_algorithms import IHashingAlgorithm
 
 
 class IHashingAlgorithmFactory(ABC):
-    _registry: Dict[str, Type[IHashingAlgorithm]]
+    """Hashign algorithm factory interface"""
 
     @abstractmethod
     def create_algorithm(self, algorithm_name: str) -> Optional[IHashingAlgorithm]:
         """Create and return hashing algorith by name or return None
 
-        :param algorithm_name: Algorithm name, no matter what case
-        :return: Hashing algorithm or None if algorithm is not supported
+        Args:
+            algorithm_name: Algorithm name
+
+        Returns:
+            Hashing algorithm or None if algorithm is not supported
         """
 
         raise NotImplementedError
@@ -23,7 +30,8 @@ class IHashingAlgorithmFactory(ABC):
     def get_available_algorithms(self) -> List[str]:
         """Get a list of available algorithms
 
-        :return: A list which contains available algorithms
+        Returns:
+            A list with available algorithms
         """
 
         raise NotImplementedError
