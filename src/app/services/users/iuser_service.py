@@ -20,6 +20,7 @@ class IUserService(ABC):
         Returns:
             A list with UsersResponse objects, which contain user data
         """
+
         raise NotImplementedError
 
     @abstractmethod
@@ -35,6 +36,7 @@ class IUserService(ABC):
         Raises:
             UserNotFoundException: If user with specified user_id is not found
         """
+
         raise NotImplementedError
 
     @abstractmethod
@@ -50,6 +52,7 @@ class IUserService(ABC):
         Raises:
             UserIsExistsException: If user is already exists
         """
+
         raise NotImplementedError
 
     @abstractmethod
@@ -59,10 +62,8 @@ class IUserService(ABC):
         Args:
             user_id: User identifier
 
-        Returns:
-            None
-
         Raises:
             UserNotFoundException: If user with specified identifier is not found
         """
+
         raise NotImplementedError

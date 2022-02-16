@@ -1,20 +1,22 @@
+"""Module for hashing algorithm interface"""
+
 __all__ = ['IHashingAlgorithm']
 
 from abc import ABC, abstractmethod
 
 
 class IHashingAlgorithm(ABC):
-    name: str
-    bits: int
-    is_secure: bool
+    """Hashing algorithm interface"""
 
-    # TODO: Should we use checksum property instead of hash method?
     @abstractmethod
     def hash(self, data: str) -> str:
         """Hash data
 
-        :param data: Data to hash
-        :return: Checksum
+        Args:
+            data: Data to hash
+
+        Returns:
+            Checksum
         """
 
         raise NotImplementedError

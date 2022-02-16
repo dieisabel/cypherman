@@ -81,9 +81,6 @@ class UserService(IUserService):
         Args:
             user_id: User identifier
 
-        Returns:
-            None
-
         Raises:
             UserNotFoundException: If user with specified identifier is not found
         """
@@ -98,12 +95,6 @@ class UserService(IUserService):
         """Commit changes
 
         Needed to be called after operations
-
-        Args:
-            None
-
-        Returns:
-            None
         """
 
         self._session.commit()

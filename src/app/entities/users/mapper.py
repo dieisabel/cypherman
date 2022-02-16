@@ -12,6 +12,8 @@ from entities.users.table import users_table
 def start_mapper() -> Mapper:
     """Start mapper that maps User entity to its users table
 
-    :return: Mapper object
+    Returns:
+        Mapper object
     """
+
     return mapper(User, users_table)

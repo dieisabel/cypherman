@@ -4,8 +4,7 @@ To work with SQLAlchemy we need some constants. Some of them used for connecting
 sessions. Those constants not indented to use in a code outside of db package.
 
 Usage of constants listed below:
-* CONFIG - current application configuration. To see what and how a config is set see
-  :func:`core.config.dependencies.get_config`
+* CONFIG - current application configuration.
 * ENGINE - object to connect to a database.
 * SESSION_MAKER - factory to create a database sessions.
 * METADATA - a registry, which will contain references to tables.

@@ -1,3 +1,5 @@
+"""Module for SHA256 hashing algorithm"""
+
 __all__ = ['SHA256HashingAlgorithm']
 
 import hashlib
@@ -6,6 +8,14 @@ from entities.hashing_algorithms import IHashingAlgorithm
 
 
 class SHA256HashingAlgorithm(IHashingAlgorithm):
+    """SHA256 hashing algorithm
+
+    Attributes:
+        name: Algorithm name
+        bits: Amount of checksum bits
+        is_secure: Can algorithm be used for securing purposes
+    """
+
     name: str = "sha256"
     bits: int = 256
     is_secure: bool = True
@@ -13,8 +23,11 @@ class SHA256HashingAlgorithm(IHashingAlgorithm):
     def hash(self, data: str) -> str:
         """Hash data with SHA256 hashing algorithm
 
-        :param data: Data to hash
-        :return: Checksum
+        Args:
+            data: Data to hash
+
+        Returns:
+            Checksum
         """
 
         encoded_data: bytes = data.encode('utf-8')

@@ -8,9 +8,10 @@ from typing import Optional
 class User:
     """User entity
 
-    :param user_id: User unique identifier
-    :param username: Username
-    :param email: Email
+    Args:
+        user_id: User unique identifier
+        username: Username
+        email: Email
     """
 
     def __init__(self, user_id: int, username: str, email: Optional[str] = None) -> None:
