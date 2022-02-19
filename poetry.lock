@@ -246,6 +246,17 @@ pytest = ">=5.0"
 dev = ["pre-commit", "tox", "pytest-asyncio"]
 
 [[package]]
+name = "pytest-pythonpath"
+version = "0.7.4"
+description = "pytest plugin for adding to the PYTHONPATH from command line or configs."
+category = "dev"
+optional = false
+python-versions = ">=2.6, <4"
+
+[package.dependencies]
+pytest = ">=2.5.2,<7"
+
+[[package]]
 name = "python-dotenv"
 version = "0.19.2"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -379,7 +390,7 @@ production = ["gunicorn"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9.5"
-content-hash = "0e197f903c43f13d5cc8b693655c36685e798af55c61b1be7429d104ac6937d4"
+content-hash = "2604725080242d22a99fd2a6817d89a2b5115706e006e84a592989c8b555f373"
 
 [metadata.files]
 anyio = [
@@ -538,6 +549,10 @@ pytest = [
 pytest-mock = [
     {file = "pytest-mock-3.6.1.tar.gz", hash = "sha256:40217a058c52a63f1042f0784f62009e976ba824c418cced42e88d5f40ab0e62"},
     {file = "pytest_mock-3.6.1-py3-none-any.whl", hash = "sha256:30c2f2cc9759e76eee674b81ea28c9f0b94f8f0445a1b87762cadf774f0df7e3"},
+]
+pytest-pythonpath = [
+    {file = "pytest-pythonpath-0.7.4.tar.gz", hash = "sha256:64e195b23a8f8c0c631fb16882d9ad6fa4137ed1f2961ddd15d52065cd435db6"},
+    {file = "pytest_pythonpath-0.7.4-py3-none-any.whl", hash = "sha256:e73e11dab2f0b83e73229e261242b251f0a369d7f527dbfec068822fd26a6ce5"},
 ]
 python-dotenv = [
     {file = "python-dotenv-0.19.2.tar.gz", hash = "sha256:a5de49a31e953b45ff2d2fd434bbc2670e8db5273606c1e737cc6b93eff3655f"},
