@@ -16,7 +16,8 @@ from fastapi import HTTPException
 
 from services.hashing import IHashingService
 from services.hashing import HashingService
-from dtos import HashesDTO
+from dtos.hashes import HashesRequest
+from dtos.hashes import HashesResponse
 
 router = APIRouter(
     prefix='/hashes',
@@ -28,15 +29,16 @@ async def get_available_hashing_algorithms(
     service: IHashingService = Depends(HashingService)
 ) -> List[str]:
     """Display a list that contains supported hashing algorithms"""
+
     return service.get_available_algorithms()
 
 
 @router.post('/{algorithm}/hash')
 async def hash_user_data(
-    request: HashesDTO.Request,
+    request: HashesRequest,
     algorithm: str,
     service: IHashingService = Depends(HashingService)
-) -> HashesDTO.Response:
+) -> HashesResponse:
     """
     Hash user data
 
@@ -44,8 +46,8 @@ async def hash_user_data(
     - **data** - User data
     """
 
-    request.set_algorithm(algorithm)
-    result: Optional[HashesDTO.Response] = service.hash_user_data(request)
+    request.algorithm = algorithm
+    result: Optional[HashesResponse] = service.hash_user_data(request)
     if not result:
-        raise HTTPException(status_code=404, detail='Algorithm is not supported')
+        raise HTTPException(status_code=404, detail=f'{algorithm} is not supported')
     return result

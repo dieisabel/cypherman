@@ -29,3 +29,7 @@ build-backend = "poetry.core.masonry.api"
 testpaths = [
     "src/tests",
 ]
+python_paths = [
+    "src/",
+    "src/app/",
+]
