@@ -1,15 +1,18 @@
+import pytest
+
 from typing import Optional, List
 
 from app.services.hashing import IHashingService
-from app.dtos import HashesDTO
+from app.dtos.hashes import HashesRequest
+from app.dtos.hashes import HashesResponse
 
 
 class TestHashingService:
     def test_hash_user_data_with_md5(self, service: IHashingService) -> None:
         # Arrange
-        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
-        request.set_algorithm('md5')
-        expected: HashesDTO.Response = HashesDTO.Response(
+        request: HashesRequest = HashesRequest('Hello, World!')
+        request.algorithm = 'md5'
+        expected: HashesResponse = HashesResponse(
             algorithm='md5',
             bits=128,
             checksum='MD5 Hash',
@@ -17,16 +20,21 @@ class TestHashingService:
         )
 
         # Act
-        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
+        actual: Optional[HashesResponse] = service.hash_user_data(request)
 
         # Assert
-        assert actual == expected
+        assert actual is not None
+        assert actual.algorithm == expected.algorithm
+        assert actual.bits == expected.bits
+        assert actual.checksum == expected.checksum
+        assert actual.is_secure == expected.is_secure
+
 
     def test_hash_user_data_with_sha1(self, service: IHashingService) -> None:
         # Arrange
-        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
-        request.set_algorithm('sha1')
-        expected: HashesDTO.Response = HashesDTO.Response(
+        request: HashesRequest = HashesRequest('Hello, World!')
+        request.algorithm = 'sha1'
+        expected: HashesResponse = HashesResponse(
             algorithm='sha1',
             bits=160,
             checksum='SHA1 Hash',
@@ -34,16 +42,21 @@ class TestHashingService:
         )
 
         # Act
-        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
+        actual: Optional[HashesResponse] = service.hash_user_data(request)
 
         # Assert
-        assert actual == expected
+        assert actual is not None
+        assert actual.algorithm == expected.algorithm
+        assert actual.bits == expected.bits
+        assert actual.checksum == expected.checksum
+        assert actual.is_secure == expected.is_secure
+
 
     def test_hash_user_data_with_non_supported_algorithm(self, service: IHashingService) -> None:
         # Arrange + Act
-        request: HashesDTO.Request = HashesDTO.Request(data='Hello, World!')
-        request.set_algorithm('sha256')
-        actual: Optional[HashesDTO.Response] = service.hash_user_data(request)
+        request: HashesRequest = HashesRequest('Hello, World!')
+        request.algorithm = 'sha256'
+        actual: Optional[HashesResponse] = service.hash_user_data(request)
 
         # Assert
         assert actual is None

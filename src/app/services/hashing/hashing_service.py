@@ -11,7 +11,9 @@ from services.hashing import IHashingService
 from services.hashing.factories import HashingAlgorithmFactory
 from services.hashing.factories import IHashingAlgorithmFactory
 from entities.hashing_algorithms import IHashingAlgorithm
-from dtos import HashesDTO
+from dtos.hashes import HashesRequest
+from dtos.hashes import HashesResponse
+from dtos.hashes import map_algorithm_to_response
 
 
 class HashingService(IHashingService):
@@ -24,7 +26,7 @@ class HashingService(IHashingService):
     def __init__(self, factory: IHashingAlgorithmFactory = Depends(HashingAlgorithmFactory)) -> None:
         self._factory = factory
 
-    def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
+    def hash_user_data(self, request: HashesRequest) -> Optional[HashesResponse]:
         """Hash user data
 
         Args:
@@ -37,7 +39,7 @@ class HashingService(IHashingService):
         algorithm: Optional[IHashingAlgorithm] = self._factory.create_algorithm(request.algorithm)
         if not algorithm:
             return None
-        return self._generate_response(algorithm, algorithm.hash(request.data))
+        return map_algorithm_to_response(algorithm, algorithm.hash(request.data))
 
     def get_available_algorithms(self) -> List[str]:
         """Get available hashing algorithms
@@ -47,12 +49,3 @@ class HashingService(IHashingService):
         """
 
         return self._factory.get_available_algorithms()
-
-    @staticmethod
-    def _generate_response(algorithm: IHashingAlgorithm, checksum: str) -> HashesDTO.Response:
-        return HashesDTO.Response(
-            algorithm=algorithm.name,
-            bits=algorithm.bits,
-            checksum=checksum,
-            is_secure=algorithm.is_secure
-        )

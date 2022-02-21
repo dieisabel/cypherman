@@ -41,7 +41,7 @@ class TestHashesControllers:
 
     def test_hash_user_data_with_non_supported_algorithm(self, client: TestClient) -> None:
         # Arrange
-        expected: Dict[str, Any] = {'detail': 'Algorithm is not supported'}
+        expected: Dict[str, Any] = {'detail': 'sha256 is not supported'}
         body: Dict[str, Any] = {'data': 'Hello, World!'}
 
         # Act
@@ -53,7 +53,7 @@ class TestHashesControllers:
 
     def test_get_available_algorithms(self, client: TestClient) -> None:
         # Arrange
-        expected: List[str] = ['md5']
+        expected: List[str] = ['md5', 'sha1']
 
         # Act
         response: Response = client.get('/api/v0/hashes')

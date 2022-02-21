@@ -7,14 +7,15 @@ from abc import abstractmethod
 from typing import List
 from typing import Optional
 
-from dtos import HashesDTO
+from dtos.hashes import HashesRequest
+from dtos.hashes import HashesResponse
 
 
 class IHashingService(ABC):
     """Hashing service interface"""
 
     @abstractmethod
-    def hash_user_data(self, request: HashesDTO.Request) -> Optional[HashesDTO.Response]:
+    def hash_user_data(self, request: HashesRequest) -> Optional[HashesResponse]:
         """Hash user data
 
         Args:
