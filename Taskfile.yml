@@ -6,3 +6,9 @@ tasks:
       - poetry run pytest
     env:
       FASTAPI_CONFIGURATION: TESTING
+
+  devserver:
+    cmds:
+      - poetry run uvicorn --app-dir src/app --reload main:application
+    env:
+      FASTAPI_CONFIGURATION: DEVELOPMENT
