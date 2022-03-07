@@ -24,14 +24,7 @@ jobs:
         shell: bash
       - name: Install poetry
         uses: snok/install-poetry@v1
-      - name: Cache virtual environment
-        id: cached-poetry-dependencies
-        uses: actions/cache@v2
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hint != 'true'
         run: poetry install
         shell: bash
         # Poetry gets settings from config file or environment variables
