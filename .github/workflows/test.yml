@@ -1,19 +1,11 @@
 name: test
 
 on:
-  # TODO: Do we need to run workflow on merged PR commits?
   push:
-    branches:
-      - master
-      - develop
+    branches: [ master, develop ]
   pull_request:
-    branches:
-      - master
-      - develop
-    types:
-      - opened
-      - reopened
-      - ready_for_review
+    branches: [ master, develop ]
+    types: [ ready_for_review ]
 
 jobs:
   build_test:
@@ -31,8 +23,7 @@ jobs:
         run: pip install --upgrade pip
         shell: bash
       - name: Install poetry
-        run: pip install --user 'poetry==1.1.11'
-        shell: bash
+        uses: snok/install-poetry@v1
       - name: Cache virtual environment
         id: cached-poetry-dependencies
         uses: actions/cache@v2
@@ -50,10 +41,9 @@ jobs:
           # Poetry will create or use virtual environment that is located in
           # project directory
           POETRY_VIRTUALENVS_IN_PROJECT: true
-
+      - name: Install task
+        uses: arduino/setup-task@v1
       # Test application
-      - name: Run tests using script
-        run: |
-          chmod +x ./scripts/test.sh
-          ./scripts/test.sh
+      - name: Run tests
+        run: task test
         shell: bash
