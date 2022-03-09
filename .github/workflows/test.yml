@@ -27,13 +27,6 @@ jobs:
       - name: Install dependencies
         run: poetry install
         shell: bash
-        # Poetry gets settings from config file or environment variables
-        env:
-          # Poetry will create virtual environment
-          POETRY_VIRTUALENVS_CREATE: true
-          # Poetry will create or use virtual environment that is located in
-          # project directory
-          POETRY_VIRTUALENVS_IN_PROJECT: true
       - name: Install task
         uses: arduino/setup-task@v1
       # Test application
