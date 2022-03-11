@@ -27,10 +27,9 @@ htmlcov/
 *.sqlite3-journal
 *.db
 
-# .env files
-.env
-.env.development
-.env.production
+# Config files
+*.env
+!docker-compose.env
 
 # Media folders
 media/
