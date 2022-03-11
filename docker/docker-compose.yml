@@ -1,27 +1,31 @@
 version: "3.8"
 
 services:
-  devserver:
-    container_name: devserver
+  dev_server:
+    container_name: dev_server
+    profiles:
+      - dev
     build:
       context: ../
       dockerfile: docker/Dockerfile
       target: dev
     command: >
       uvicorn --host 0.0.0.0 --port 8000 --app-dir src/ --reload main:application
+    env_file:
+      - ../config/dev.env
     ports:
       - "8000:8000"
     volumes:
       - "../src/app:/app/src:ro"
+    depends_on:
+      - dev_postgresql
+
+  dev_postgresql:
+    container_name: dev_postgresql
+    image: postgres:14
+    profiles:
+      - dev
     env_file:
       - ../config/dev.env
-    depends_on:
-      - postgresql
-
-  postgresql:
-    container_name: postgresql
-    image: postgres:14
     ports:
       - "5432:5432"
-    env_file:
-      - ../config/dev.env

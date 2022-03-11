@@ -10,3 +10,6 @@ tasks:
   devserver:
     cmds:
       - docker-compose -f docker/docker-compose.yml --env-file docker/docker-compose.env up
+    env:
+      # Specify development profile for docker-compose
+      COMPOSE_PROFILES: dev
