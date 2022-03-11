@@ -1,0 +1,20 @@
+# Virtual environments
+.venv/
+venv
+
+# Editors
+.idea
+.vscode
+
+# Git files
+.git
+**/.gitattributes
+**/.gitignore
+
+# Git platforms
+.github
+
+# Other files
+LICENSE
+README.md
+.editorconfig
