@@ -9,6 +9,4 @@ tasks:
 
   devserver:
     cmds:
-      - poetry run uvicorn --app-dir src/app --reload main:application
-    env:
-      FASTAPI_CONFIGURATION: DEVELOPMENT
+      - docker-compose -f docker/docker-compose.yml --env-file docker/docker-compose.env up
