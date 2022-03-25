@@ -5,6 +5,7 @@ services:
     container_name: dev_server
     profiles:
       - dev
+    restart: always
     build:
       context: ../
       dockerfile: docker/Dockerfile
@@ -29,3 +30,32 @@ services:
       - ../config/dev.env
     ports:
       - "5432:5432"
+
+  test_app:
+    container_name: test_app
+    profiles:
+      - test
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+      target: test
+    command: pytest $PYTEST_ARGS
+    env_file:
+      - ../config/test.env
+    environment:
+      - "PYTEST_ARGS=${PYTEST_ARGS}"
+    volumes:
+      - "../src/:/app/src:ro"
+    depends_on:
+      - test_postgresql
+
+  test_postgresql:
+    container_name: test_postgresql
+    image: postgres:14
+    profiles:
+      - test
+    env_file:
+      - ../config/test.env
+    # Expose ports only to a docker network
+    ports:
+      - "5432"

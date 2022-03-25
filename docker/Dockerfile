@@ -1,5 +1,5 @@
 # Dockerfile for backend application. Intented to use in docker-compose, so it
-# doesn't contain CMD, ENTRYPOINT and dont exposing ports
+# doesn't contain CMD, ENTRYPOINT and dont expose ports
 
 # Base stage where initial preparations are done
 FROM python:3.9-slim-bullseye as base
@@ -40,4 +40,15 @@ FROM base as dev
 ENV PYTHONDONTWRITEBYTECODE 1
 
 # Install development dependencies
+RUN poetry install --no-interaction --no-ansi
+
+
+# Stage for testing environment, where testing environment is configured
+FROM base as test
+
+# Force python to write byte code, this can make tests faster by using precompiled
+# byte code
+ENV PYTHONWRITEBYTECODE 1
+
+# Install development dependencies, where dependencies for tests are listed too
 RUN poetry install --no-interaction --no-ansi

@@ -2,14 +2,36 @@ version: "3"
 
 tasks:
   test:
+    desc: Up testing environment and run tests
+    summary: |
+      Up testing environment and run tests
+
+      Create if needed and start docker containers for testing environment, run tests
+      using pytest. For reference see docker/docker-compose.yml for services with test
+      profile.
+      To specify pytest arguments use task arguments:
+        task test -- <argumets>
     cmds:
-      - poetry run pytest
+      - PYTEST_ARGS={{.CLI_ARGS}}
+        docker-compose
+        -f docker/docker-compose.yml
+        --env-file docker/docker-compose.env up
     env:
-      FASTAPI_CONFIGURATION: TESTING
+      COMPOSE_PROFILES: test
+    silent: true
 
   devserver:
+    desc: Up development environment and start development server
+    summary: |
+      Up development environment and start development server
+
+      Create if needed and start docker containers for development environment, start
+      uvicorn development server. For reference see docker/docker-compose.yml for
+      services with dev profile.
     cmds:
-      - docker-compose -f docker/docker-compose.yml --env-file docker/docker-compose.env up
+      - docker-compose
+          -f docker/docker-compose.yml
+          --env-file docker/docker-compose.env up
     env:
-      # Specify development profile for docker-compose
       COMPOSE_PROFILES: dev
+    silent: true
