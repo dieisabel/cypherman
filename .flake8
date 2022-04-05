@@ -1,0 +1,26 @@
+# Configuration for flake8 - python linter
+# For reference see
+[flake8]
+
+# Ignore codes
+ignore =
+    # E501: line too long. Use formatter so flake8 doesn't need to warn about this
+    E501,
+
+# Exclude folders and files from checks
+exclude =
+    # There's no value in checking cache directories
+    __pycache__,
+    .pytest_cache,
+    .mypy_cache,
+
+    # No need to check build directories
+    build/,
+    dist/,
+
+    .git,
+
+# Ignore codes per file
+per-file-ignores =
+    # F401: Imported but unused
+    __init__.py: F401

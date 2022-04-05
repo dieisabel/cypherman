@@ -34,3 +34,125 @@ python_paths = [
     "src/",
     "src/app/",
 ]
+
+# Configuration for mypy - python type checking tool
+# For reference see https://mypy.readthedocs.io/en/stable/config_file.html
+[tool.mypy]
+
+# Specify files and directories to check
+files = ["src/**/*.py"]
+
+# Exclude folders and file from checking
+exclude = [
+    # There is no value in checking cache directories
+    "__pycache__/",
+    ".pytest_cache/",
+    ".mypy_cache",
+
+    # No need to check build directories
+    "build/",
+    "dist/",
+
+    ".git/",
+]
+
+# Follow imports and type check all top level code but suppress any error message
+follow_imports = "silent"
+
+# Suppress error messages about imports that cannot be resolved
+# Useful if you use modules without type hints
+ignore_missing_imports = true
+
+# Disallow untyped function definitions
+disallow_untyped_defs = true
+
+# Disallow incomplete function definitions
+disallow_incomplete_defs = true
+
+# Check the body of every function, regardless of whether it has type annotations
+check_untyped_defs = true
+
+# Force to explicitly indicate that type can be None
+# Example:
+#   def foo(x: int = None) -> None: ...   # Error
+#   def foo(x: Optional[int] = None) -> None: ...    # Good
+no_implicit_optional = true
+
+# Threat None as non-compatible with every type
+strict_optional = true
+
+# Prettify output
+pretty = true
+
+# Show error codes like [arg-type] or [return-value]
+# See https://mypy.readthedocs.io/en/stable/error_code_list.html#error-code-list for
+# a list of error codes
+show_error_codes = true
+
+# Prefix each error with the relevant context
+show_error_context = true
+
+# Warn about ignores which are not effective
+warn_unused_ignores = true
+
+# Warn about per-module sections that do not match any processed files
+warn_unused_configs = true
+
+# Warn about function that returns a Any value but declared with a non-Any return type
+warn_return_any = true
+
+# Don't threat imported modules automatically as exported
+implicit_reexport = false
+
+# Prohibit checks between non-overlapping types
+strict_equality = true
+
+# Disallow usage of generic types that do not specify type parameters
+disallow_any_generics = true
+
+# Disallow subclassing a value of type Any
+disallow_subclassing_any = true
+
+# Configuration for black - python formatter
+# Black is not particularly configurable, so it doesn't contain much
+[tool.black]
+
+# Specify line length
+line-length = 100
+
+# Configuration for isort - tool that formats imports
+# For reference see https://pycqa.github.io/isort/docs/configuration/options
+[tool.isort]
+
+# Specify line length
+line_length = 100
+
+# Force all from imports to appear on their own line
+force_single_line = true
+
+# Specify section order
+sections = [
+    "FUTURE",
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "LOCALFOLDER",
+]
+
+# Strip comments that exist within import lines
+ignore_comments = true
+
+# Specify amount of empty lines after imports and between sections
+lines_after_imports = 2
+lines_between_sections = 1
+
+# Specify path to source code
+src_paths = [
+    "src/app/",
+]
+
+# Specify third party modules
+known_third_party = [
+    "fastapi",
+    "sqlalchemy",
+]
